@@ -9,11 +9,10 @@ on_chroot << EOF
   curl -s -o /tmp/wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
   chmod +x /tmp/wait-for-it.sh
 
-  git clone https://github.com/Screenly/screenly-ose.git /home/pi/screenly
+  git clone https://github.com/Wes974/screenly-ose.git /home/pi/screenly
   cd /home/pi/screenly
-  git checkout production
 
-  pip install -r requirements.txt
+  pip install -r requirements/requirements.txt
   mkdir -p /etc/ansible
   echo -e "[local]\nlocalhost ansible_connection=local" | tee /etc/ansible/hosts > /dev/null
 
@@ -37,7 +36,7 @@ on_chroot << EOF
   /tmp/wait-for-it.sh --host=127.0.0.1 --port=8080
 
   # Adds default assets
-  /home/pi/screenly/bin/prepare_device_for_imaging.sh
+  # /home/pi/screenly/bin/prepare_device_for_imaging.sh
 
   pkill -f server.py
   sleep 5
